@@ -6,6 +6,7 @@ Created on Wed Oct  2 00:35:40 2024.
 """
 
 import pandas as pd
+# Loading or creating a DataFrame and assigning it to 'hour'
 hour = pd.read_csv('data/hour.csv')
 print(hour.head())
 print('')
@@ -51,6 +52,14 @@ print("\nThe average ridership statistics for the number of riders in either"
 # the DataFrame hour, but only for rows where either the 'temp' column is
 # greater than 0.5 or the 'hum' column is greater than 0.5.
 print(hour.loc[(hour['temp'] > 0.5) | (hour['hum'] > 0.5), 'count'].mean())
+# Display the filtered DataFrame as a string
+print('')
+print('Descriptive Stats')
+print(hour[['temp', 'hum', 'count']].describe())
+summary_stats = hour[['temp', 'hum', 'count']].describe()
+print(summary_stats.to_string())
+
+
 # hour.loc[(hour['temp'] > 0.5) | (hour['hum'] > 0.5), 'count']: This uses .loc
 # to filter hour DataFrame rows based on the condition temp > 0.5 or hum > 0.5
 # and selects only the 'count' column.
