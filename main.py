@@ -6,8 +6,13 @@ Created on Wed Oct  2 00:35:40 2024.
 """
 
 import pandas as pd
+import matplotlib.pyplot as plt
+
 # Loading or creating a DataFrame and assigning it to 'hour'
 hour = pd.read_csv('data/hour.csv')
+
+# ****************** EXPLORATORY DATA ANALYSIS BELOW ***********************
+
 print(hour.head())
 print('')
 # print(f"The mean of the total users(count) is: {hour['count'].mean()}")
@@ -78,3 +83,32 @@ print(hour.groupby(['season'])['count'].mean())
 print(
     "Legend for holidays:  \nHoliday = 1 \nNon-Holiday = 0")
 print(hour.groupby(['season', 'holiday'])['count'].mean())
+
+# ************ VISUALIZING DATA WITH MATPLOTLIB *****************************
+
+# ********** SCATTER PLOT OF ALL DATA ********
+
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.scatter(x=hour['instant'], y=hour['count'])
+ax.set_xlabel('Hour')
+ax.set_ylabel('Count')
+ax.set_title('Ridership Count By Hour')
+plt.show()
+
+# ******** SCATTER PLOT OF FIRST TWO DAYS ***********
+
+hour_first48 = hour.loc[0:48, :]
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.scatter(x=hour_first48['instant'], y=hour_first48['count'])
+plt.xlabel('Hour')
+plt.ylabel('Count')
+plt.title('Count by hour - First Two Days')
+
+# ******** SCATTER PLOT OF LAST YEAR ***********
+
+hour_last_year = hour.loc[8750:17500, :]
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.scatter(x=hour_last_year['instant'], y=hour_last_year['count'])
+plt.xlabel('Hour')
+plt.ylabel('Count')
+plt.title('Count by hour - Last Year')
